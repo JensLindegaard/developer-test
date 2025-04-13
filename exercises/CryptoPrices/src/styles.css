@@ -1,43 +1,269 @@
 /* Reset some default styles */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    background-color: #f4f4f4;
-    color: #333;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #333;
+  color: #f4f4f4;
 }
 
 /* Basic layout styles */
 header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
 }
 
 header h1 {
-    font-size: 24px;
+  font-size: 24px;
 }
 
 main {
-    display: flex;
-    justify-content: center;
-    margin: 40px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 60rem;
+  margin: auto;
+  padding: 0 1rem 0 1rem;
 }
 
 footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  position: sticky;
+  bottom: 0;
+  width: 100%;
 }
 
 /* Add your CSS below here */
+/* Table container */
+#crypto-table {
+  width: 100%;
+  border-spacing: 0;
+  background-color: #333;
+  margin-bottom: 1rem;
+}
+
+/* Caption styling */
+#crypto-table caption {
+  caption-side: top;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+/* Table headers and cells */
+th, td {
+  border: 1px solid #706a6a;
+  text-align: left;
+}
+
+td {
+  padding: 0.25rem 0.75rem;
+}
+
+th {
+  padding: 1rem;
+  color: #1ba4ed;
+}
+
+/* Set column widths to improve layout consistency */
+th:nth-child(1), td:nth-child(1),
+th:nth-child(3), td:nth-child(3) {
+  width: 14rem;
+}
+
+th:nth-child(2), td:nth-child(2) {
+  width: auto;
+}
+
+/* Pagination container and buttons */
+#pagination {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.button {
+  background-color: transparent;
+  color: white;
+  border: 1px solid #706a6a;
+  padding: 0.75rem 1.25rem;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 0.25rem;
+}
+
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Coin-specific styling */
+.coin-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.coin-name-container {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.coin-symbol {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.coin-name {
+  font-size: 0.9rem;
+  color: #ccc;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Price area */
+.price-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.current-price {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.high-low-group {
+  display: flex;
+}
+
+.high-low {
+  font-size: 0.9rem;
+  font-weight: bold;
+  padding: 0.5rem;
+}
+
+.high {
+  background-color: #1b5e20;
+  color: #38e03d;
+  border-radius: 0.25rem 0 0 0.25rem;
+}
+
+.low {
+  background-color: #771414a6;
+  color: #ff0202;
+  border-radius: 0 0.25rem 0.25rem 0;
+}
+
+/* Market Cap styling */
+.market-cap {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+/* Tablet breakpoint: ≤ 768px */
+@media (max-width: 768px) {
+  th:nth-child(1),
+  td:nth-child(1),
+  th:nth-child(3),
+  td:nth-child(3) {
+    width: 10rem;
+  }
+
+  th {
+    padding: 0.75rem;
+    font-size: 1rem;
+  }
+
+  .coin-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.75rem;
+    min-height: 5rem;
+    justify-content: flex-start;
+  }
+
+  .high-low {
+    font-size: 1rem;
+    padding: 0.25rem;
+  }
+}
+
+/* Mobile breakpoint: ≤ 480px */
+@media (max-width: 480px) {
+  th, td {
+    padding: 0.5rem;
+  }
+
+  th:nth-child(1),
+  td:nth-child(1) {
+    width: 4rem;
+  }
+
+  th:nth-child(3),
+  td:nth-child(3) {
+    width: 8rem;
+    max-width: 8rem;
+    min-width: 8rem;
+  }
+
+  .coin-name-container {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .coin-name {
+    display: none;
+  }
+
+  .coin-container {
+    flex-direction: column;
+  }
+
+  .coin-symbol {
+    font-size: 0.75rem;
+    text-overflow: ellipsis;
+  }
+
+  .price-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .current-price {
+    font-size: 0.75rem;
+  }
+
+  .high-low {
+    font-size: 0.75rem;
+    padding: 0.25rem;
+  }
+
+  .market-cap {
+    font-size: 0.75rem;
+  }
+
+  .button {
+    font-size: 0.75rem;
+    padding: 0.5rem 1rem;
+  }
+}
