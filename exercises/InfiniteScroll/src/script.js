@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Fetch 5 testimonials
   function fetchTestimonials() {
     if (isLoading || !hasNext) {
-      return; 
+      return;
     }
     isLoading = true;
 
@@ -29,13 +29,19 @@ document.addEventListener("DOMContentLoaded", () => {
           // Create a new div for each testimonial
           const testimonialDiv = document.createElement("div");
           testimonialDiv.classList.add("testimonial");
-          testimonialDiv.textContent = testimonial.message;
+          testimonialDiv.innerHTML = `
+              <img src="image.png" alt="Dummy portrait picture" class="image" />
+              <div class="content">
+                <p class="name">John Doe</p>
+                <p class="message">${testimonial.message}</p>
+              </div>
+          `;
 
           // Append the testimonial to the container
           testimonialContainer.appendChild(testimonialDiv);
         });
 
-        // Update cursor "after" to the last fetched testimonial's ID
+        // Update cursor "lastTestimonialId" to the last fetched testimonial's ID
         if (data.testimonials.length > 0) {
           lastTestimonialId = data.testimonials[data.testimonials.length - 1].id;
         }
@@ -52,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function onContainerScroll() {
     const container = testimonialContainer;
     const scrollPosition = container.scrollTop + container.clientHeight;
-    const scrollHeight = container.scrollHeight - 100;
+    const scrollHeight = container.scrollHeight - 150;
 
     if (scrollPosition >= scrollHeight) {
       fetchTestimonials();
